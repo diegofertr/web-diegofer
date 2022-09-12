@@ -62,10 +62,14 @@ export default function Layout({ children, home }) {
         {/*<link rel="manifest" href="/site.webmanifest" />*/}
       </Head>
 
-      <header>
+      <header className="sticky top-0 bg-white z-50">
+        {/*<img
+          src="https://images.pexels.com/photos/3747463/pexels-photo-3747463.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+          className="absolute object-cover w-full h-full"
+          alt=""
+        />*/}
         <nav
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-          aria-label="Top"
         >
           <div className="w-full py-6 flex items-center justify-between border-b border-blue-500 lg:border-none">
             <div className="flex items-center">
@@ -91,7 +95,7 @@ export default function Layout({ children, home }) {
                 rel="noreferrer"
                 className="inline-block font-mono font-bold bg-white py-2 px-4 border border-transparent tracking-tighter rounded-md text-base lowercase text-blue-600 hover:bg-blue-50"
               >
-                Follow Me
+                Hire me
               </a>
             </div>
           </div>
@@ -112,6 +116,16 @@ export default function Layout({ children, home }) {
         {home && (
           <div className="mx-auto mt-16 max-w-7xl px-4 sm:mt-24">
             <div className="text-center">
+              <span className="relative inline-block text-gray-400">
+                <svg viewBox="0 0 52 24" fill="currentColor" className="absolute top-4 -left-36 z-0 hidden w-32 -mt-8 -ml-20 text-blue-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block">
+                  <defs>
+                    <pattern id="e77df901-b9d7-4b9b-822e-16b2d410795b" x="0" y="0" width=".135" height=".30">
+                      <circle cx="1" cy="1" r=".7"></circle>
+                    </pattern>
+                  </defs>
+                  <rect fill="url(#e77df901-b9d7-4b9b-822e-16b2d410795b)" width="52" height="24"></rect>
+                </svg>
+              </span>
               <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
                 <span className="block xl:inline tracking-tighter font-mono">
                   diego

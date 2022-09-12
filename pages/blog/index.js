@@ -1,33 +1,59 @@
 import Link from "next/link";
 import Layout from "../../components/layout";
 import { getAllPosts } from "../../lib/posts";
+import { format, parseISO, intlFormat } from 'date-fns'
 
 const blog = ({ posts }) => {
   return (
     <Layout>
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
         <h2 className="text-3xl font-bold tracking-tight">Posts</h2>
-        <div className="my-10 flex md:items-center md:justify-between">
-          <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-4">
-            {posts.map((post, idxPost) => (
-              <div
-                key={idxPost}
-                className="p-6 hover:bg-yellow-100 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
-              >
-                <Link href={`/blog/${post.slug}`}>
-                  <h5 className="mb-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    {post.title}
-                  </h5>
-                </Link>
-                <p className="mb-4 font-normal text-gray-700 dark:text-gray-400">
-                  {post.summary}
-                </p>
-                <Link href={`/blog/${post.slug}`}>
-                  <div className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Read more
-                    <svg aria-hidden="true" className="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
+        <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+          <div className="mb-10 border-t border-b divide-y">
+            { posts.map((post, idxPost) => (
+              <div className="grid py-8 sm:grid-cols-4" key={idxPost}>
+                <div className="mb-4 sm:mb-0">
+                  <div className="space-y-1 text-xs font-semibold tracking-wide uppercase">
+                    {post.tags && post.tags.map((postTag, idxPostTag) => (
+                      <Link
+                        key={idxPostTag}
+                        href="/"
+                        aria-label="Category"
+                      >
+                        <span className="transition-colors duration-200 text-blue-500 hover:text-blue-800">
+                          {postTag}
+                        </span>
+                      </Link>
+                    ))}
+                    {/*<p className="text-gray-600">5 Jan 2020</p>*/}
+                    <p className="text-gray-600">
+                      {intlFormat(parseISO(`${post.date}`), {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric'
+                      }, {
+                        locale: 'es-ES'
+                      })}
+                    </p>
                   </div>
-                </Link>
+                </div>
+                <div className="sm:col-span-3 lg:col-span-2">
+                  <div className="mb-3">
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      aria-label="Article"
+                    >
+                      <div className="text-black transition-colors duration-200 hover:text-blue-700">
+                        <p className="text-3xl font-extrabold leading-none sm:text-4xl xl:text-4xl">
+                          {post.title}
+                        </p>
+                      </div>
+                    </Link>
+                  </div>
+                  <p className="text-gray-700">
+                    {post.summary}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
